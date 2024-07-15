@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from typing import Any
 from loguru import logger
-from fastapi import HTTPException
 from fastapi.exceptions import RequestValidationError
 from starlette.requests import Request
 from starlette.responses import JSONResponse

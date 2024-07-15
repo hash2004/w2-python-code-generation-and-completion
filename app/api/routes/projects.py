@@ -13,7 +13,7 @@ router = APIRouter()
 
 @router.post('', response_model=ProjectResponse)
 async def create_project(project: ProjectCreate, db: Session = Depends(get_db)):
-    db_project = crud.create_project(db, project.id, project.name, project.description)
+    db_project = crud.create_project(db, project.name, project.description)
     return db_project
 
 @router.get('/{project_id}', response_model=ProjectResponse)
