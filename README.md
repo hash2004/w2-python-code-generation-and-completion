@@ -81,10 +81,8 @@ The Project Management API is designed to facilitate the management of projects 
 To run the application locally, make sure you have Python installed. Then follow these steps at the root directory of the project:
 
 1. Install depdencies: `pip install -r requirements.txt`
-2. Run the application: `fastapi dev app/main.py`
+2. Run the application: `fastapi dev app/main.py` You may use `dev` or `prod` as the `fastapi` argument
 3. Navigate to `http://localhost:8000` to view the application
-
-* Note: The application will run on port 8000 by default. To change the port, set the `PORT` environment variable.
 
 * Note: The application will run in debug mode by default. To disable debug mode, set the `APP_ENV` environment variable to `prod`.
 
