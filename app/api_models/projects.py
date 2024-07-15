@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 class ProjectCreate(BaseModel):
-    name: str
+    name: int
     description: Optional[str] = None
 
 
