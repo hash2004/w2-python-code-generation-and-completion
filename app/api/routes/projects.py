@@ -19,15 +19,11 @@ async def create_project(project: ProjectCreate, db: Session = Depends(get_db)):
 @router.get('/{project_id}', response_model=ProjectResponse)
 async def read_project(project_id: int, db: Session = Depends(get_db)):
     db_project = crud.get_project(db, project_id)
-    if db_project is None:
-        raise HTTPException(status_code=404, detail=f"Project with id {project_id} not found")
     return db_project
 
 @router.put('/{project_id}', response_model=ProjectResponse)
 async def update_project(project_id: int, project: ProjectCreate, db: Session = Depends(get_db)):
     db_project = crud.update_project(db, project_id, project.name, project.description)
-    if db_project is None:
-        raise HTTPException(status_code=404, detail=f"Project with id {project_id} not found")
     return db_project
 
 @router.delete('/{project_id}')
