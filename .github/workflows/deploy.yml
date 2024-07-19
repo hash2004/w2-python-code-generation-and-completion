@@ -20,9 +20,17 @@ jobs:
         service_account_key: ${{ secrets.GCP_SA_KEY }}
         project_id: ${{ secrets.GCP_PROJECT }}
 
-    - name: Build and push image to Google Container Registry
+    - name: Build Docker Image
       run: |
-        gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT }}/testing:$GITHUB_SHA
+        docker build -t gcr.io/${{ secrets.GCP_PROJECT }}/testing:$GITHUB_SHA .
+
+    - name: Configure Docker for GCR
+      run: |
+        gcloud auth configure-docker
+
+    - name: Push Image to Google Container Registry
+      run: |
+        docker push gcr.io/${{ secrets.GCP_PROJECT }}/testing:$GITHUB_SHA
 
     - name: Deploy to Cloud Run
       run: |
