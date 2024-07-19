@@ -1,0 +1,29 @@
+name: Deploy to Google Cloud Run
+
+on:
+  push:
+    branches:
+      - main  # Set to your default branch
+
+jobs:
+  setup-build-deploy:
+    name: Setup, Build, and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ secrets.GCP_PROJECT }}
+
+    - name: Build and push image to Google Container Registry
+      run: |
+        gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT }}/testing:$GITHUB_SHA
+
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy testing --image gcr.io/${{ secrets.GCP_PROJECT }}/testing:$GITHUB_SHA --platform managed --region us-central1 --allow-unauthenticated
