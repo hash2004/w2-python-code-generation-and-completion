@@ -5,4 +5,4 @@ router = APIRouter()
 
 @router.get("/ping", status_code=200)
 async def ping():
-    return "OK"
+    return "Not OK Please Help Me Daddy"
