@@ -13,9 +13,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Make port 8000 available to the world outside this container
 
 # Define environment variable
-ENV APP_ENV=dev
+#ENV APP_ENV=dev
 # Set the PORT environment variable
-ENV PORT=8080
+#ENV PORT=8080
 
 # Run app.py when the container launches
 # ... (rest of your Dockerfile)
