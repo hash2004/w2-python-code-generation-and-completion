@@ -39,7 +39,7 @@ jobs:
 
       - name: Set gcloud account
         run: |
-          gcloud config set account hashim@***.iam.gserviceaccount.com
+          gcloud config set account hashim@alfred-ai-missions-test.iam.gserviceaccount.com
 
       - name: Configure Docker to use the gcloud command-line tool as a credential helper
         run: |
