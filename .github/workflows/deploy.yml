@@ -12,8 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Configure Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v0.1.1  # Updated version
+
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
