@@ -2,23 +2,19 @@
 FROM python:3.8-slim
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /usr/src/app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy the current directory contents into the container at /usr/src/app
+COPY . .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Make port 8000 available to the world outside this container
+#EXPOSE 8000
 
 # Define environment variable
-ENV APP_ENV=dev
-# Set the PORT environment variable
-ENV PORT=5000 
- # Change 8080 to your desired port, e.g., 5000
-# Run app.py when the container launches
-# ... (rest of your Dockerfile)
+ENV APP_ENV=prod
 
-# Run app.py when the container launches (listening on port 8080)
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "$PORT", "--reload"]
+# Run app.py when the container launches
+CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}

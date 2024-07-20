@@ -1,4 +1,3 @@
-import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
@@ -16,10 +15,7 @@ def get_application() -> FastAPI:
     settings = get_app_settings()
     settings.configure_logging()
     
-    # Get the port from the environment variable
-    port = int(os.environ.get("PORT", 8080))  # Default to 8080 if not set
-
-    application = FastAPI(**settings.fastapi_kwargs, port=port)  # Pass the port
+    application = FastAPI(**settings.fastapi_kwargs)
     application.state.settings = settings
     
     origins = ["http://localhost:3000"]
@@ -42,4 +38,4 @@ def get_application() -> FastAPI:
     
     return application
 
-app = get_application(port=int(os.environ.get("PORT", 5000)))  # Default to 8080 if not set
+app = get_application()
