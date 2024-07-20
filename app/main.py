@@ -42,4 +42,4 @@ def get_application() -> FastAPI:
     
     return application
 
-app = get_application()
+app = get_application(port=int(os.environ.get("PORT", 8080)))  # Default to 8080 if not set
