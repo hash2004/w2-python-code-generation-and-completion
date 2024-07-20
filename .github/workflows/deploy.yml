@@ -56,12 +56,27 @@ env:
   REGION: us-central1 # TODO: update Cloud Run service region
 
 jobs:
+  security_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/setup@master
+      - name: Snyk monitor
+        run: snyk monitor
+        env:
+          SNYK_TOKEN: ${{ secrets.Snyk_token }}
+      - name: Snyk test
+        run: snyk test
+        env:
+          SNYK_TOKEN: ${{ secrets.Snyk_token }}
   deploy:
+    needs: security_check
     # Add 'id-token' with the intended permissions for workload identity federation
     permissions:
       contents: 'read'
       id-token: 'write'
-
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
