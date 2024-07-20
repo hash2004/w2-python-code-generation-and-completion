@@ -17,7 +17,7 @@ def get_application() -> FastAPI:
     settings.configure_logging()
     
     # Get the port from the environment variable
-    port = int(os.environ.get("PORT", 8080))  # Default to 8080 if not set
+    port = int(os.environ.get("PORT", 5000))  # Default to 8080 if not set
 
     application = FastAPI(**settings.fastapi_kwargs, port=port)  # Pass the port
     application.state.settings = settings
@@ -42,4 +42,4 @@ def get_application() -> FastAPI:
     
     return application
 
-app = get_application(port=int(os.environ.get("PORT", 8080)))  # Default to 8080 if not set
+port = int(os.environ.get("PORT", 5000))  # Change 8080 to your desired port, e.g., 5000
